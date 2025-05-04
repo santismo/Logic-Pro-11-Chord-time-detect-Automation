@@ -2,10 +2,6 @@ Chord logger
 
 Important project settings:
 
-File
-Project settings
-Enable smpte view offset
-
 Settings
 View
 Clock format 1 1  1
