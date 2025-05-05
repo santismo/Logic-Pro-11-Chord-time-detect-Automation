@@ -6,7 +6,14 @@ Settings
 View
 Clock format 1 1  1
 
+
+Video explanation: 
+https://www.youtube.com/shorts/LtUfBbqKwLI
+
 Logic scripter chord/time detect:
+
+Copy all of this into scripter:
+--------------------------------------
 
 // Enable timing info var NeedsTimingInfo = true;
 
@@ -60,10 +67,20 @@ function getNoteName(pitch) { var names = ["C","Db","D","Eb","E","F","Gb","G","A
 
 function getChordName(pitches) { if (!pitches.length) return "No chord"; var best = { name: "?", root: pitches[0], match: 0, weight: 0 }; for (var i = 0; i < pitches.length; i++) { var root = pitches[i]; var intervals = pitches.map(p => (p - root + 12) % 12); var unique = Array.from(new Set(intervals)); chordLibrary.forEach(function(ch) { var matchCount = ch.intervals.filter(iv => unique.includes(iv)).length; var ratio = matchCount / ch.intervals.length; var isDomForm = ch.name.includes("7") && !ch.name.includes("maj"); if (ratio >= 0.75 && matchCount > best.match) { best = { name: ch.name, root: root, match: matchCount, weight: ratio + (isDomForm && unique.includes(4) && unique.includes(10) ? 0.1 : 0) }; } }); } var rootName = getNoteName(best.root); var bass = getNoteName(pitches[0]); var chordName = rootName + best.name; if (best.root % 12 !== pitches[0] % 12) chordName += " / " + bass; return chordName; }
 
+
+--------------------------------------
+
+
+
 Apple Shortcut, automate marker positions and chord name input:
 
 Command option control space —> chord marker place
 
+
+Copy this applescript into shortcuts, choose desired shortcut command:
+
+
+--------------------------------------
 on run -- 1) Read all lines from the clipboard set lineList to paragraphs of (the clipboard)
 
 tell application "System Events"
@@ -74,10 +91,8 @@ tell application "System Events"
 			set AppleScript's text item delimiters to ","
 			set {posString, chordNameRaw} to text items of thisLine
 			set AppleScript's text item delimiters to ""
-			
 			-- 3) Clean up chord name
 			set cleanedChord to my trimText(chordNameRaw)
-			
 			-- A) Go to Position
 			keystroke "z"
 			delay 0.15
@@ -88,11 +103,9 @@ tell application "System Events"
 			delay 0.15
 			key code 36 -- Return
 			delay 0.15
-			
 			-- B) Create Marker (Control+Option+M)
 			key code 46 using {control down, option down}
 			delay 0.15
-			
 			-- C) Rename Marker with '=' key
 			key code 24 -- '='
 			delay 0.1
@@ -108,11 +121,16 @@ end run
 
 -- Helper: trim whitespace on trimText(txt) set txt to txt as string set txt to do shell script "echo " & quoted form of txt & " | sed 's/^ *//;s/ *$//'" return txt end trimText
 
-Instructions:
+
+--------------------------------------
+
+
+
+Detailed Instructions for Newbs:
 
 Open a software instrument track and select Scripter in the MIDI FX slot.
 
-Replace the existing script with the provided code.
+Replace the existing script with the scripter code.
 
 Enable timing info by setting var NeedsTimingInfo = true and ensuring the plugin settings have "Receive Timing" enabled.
 
@@ -120,6 +138,8 @@ Save the preset as "Chord Logger" or similar. For the Apple Shortcut setup:
 
 Use the clipboard to copy the plugin’s console output of detected chord data and run the shortcut. Detailed setup instructions for Logic Pro and Apple Shortcut
 
+
+--------------------------------------
 In Logic Pro, map the following key commands:
 
 "z" to "Go to Position" (Transport > Go to Position).
@@ -127,11 +147,15 @@ Control + Option + M to "Create Marker".
 "=" to "Rename Marker".
 In Logic's Key Commands, cancel the default assignment for Control + Option + Command + Space to allow the Apple Shortcut to trigger.
 
+--------------------------------------
+
 In the Shortcuts app, create a new shortcut named "Chord logger".
 
 Add the "Run AppleScript" action and paste the script inside.
 Set Command + Option + Control + Space as the shortcut trigger. Thought for 12 seconds Here’s a step-by-step guide to get everything running smoothly. We’ll cover:
 Logic Pro key-command setup
+
+--------------------------------------
 
 Installing the Scripter plugin
 
@@ -147,6 +171,8 @@ Open Logic Pro → Key Commands → Edit…
 
 Map “Go to Position…” to z
 
+
+--------------------------------------
 Search for Transport → Go to Position…
 Click Learn by Key Label, press z, click Assign.
 Map “Create Marker” to Control + Option + M
@@ -169,13 +195,16 @@ In your project, create (or select) a Software Instrument track.
 
 In the MIDI FX slot, choose Scripter → Open Editor.
 
-Delete all default code and paste in the full “Logic scripter chord/time detect” script you provided.
+Delete all default code and paste in the full “Logic scripter chord/time detect” script.
 
 At the top of the plugin window make sure Enable is on.
 
 Click the Preset dropdown → Save As… → name it Chord/Time Detect.
 
 Close the editor. Tip: you don’t need to touch the plugin’s UI—your script’s NeedsTimingInfo = true already grabs beat positions.
+
+
+--------------------------------------
 
 Create the macOS Shortcut
 
@@ -191,6 +220,10 @@ Toggle Use as Quick Action if you like.
 In Keyboard Shortcut, click none then press ⌃⌥⌘Space.
 Close the settings, then File → Save.
 
+
+--------------------------------------
+Optional*
+
 Disable the macOS “⌃⌥⌘Space” conflict By default, macOS uses Control + Command + Space (with or without Option) to open the Emoji & Symbols panel. To free it:
 
 Open System Settings → Keyboard → Keyboard Shortcuts.
@@ -198,6 +231,11 @@ Open System Settings → Keyboard → Keyboard Shortcuts.
 Go to Input Sources (or “Show Emoji & Symbols”).
 
 Uncheck the shortcut for Show Emoji & Symbols. Now ⌃⌥⌘Space will reliably fire your “Create Chord Markers” shortcut instead.
+
+
+--------------------------------------
+--------------------------------------
+--------------------------------------
 
 Full workflow
 
