@@ -40,42 +40,12 @@ Download and copy raw code from applescript text file into shortcuts, choose des
 
 Detailed Instructions for Newbs:
 
-Open a software instrument track and select Scripter in the MIDI FX slot.
 
-Replace the existing script with the scripter code.
-
-Enable timing info by setting var NeedsTimingInfo = true and ensuring the plugin settings have "Receive Timing" enabled.
-
-Save the preset as "Chord Logger" or similar. For the Apple Shortcut setup:
-
-Use the clipboard to copy the plugin’s console output of detected chord data and run the shortcut. Detailed setup instructions for Logic Pro and Apple Shortcut
-
-
---------------------------------------
-In Logic Pro, map the following key commands:
-
-"z" to "Go to Position" (Transport > Go to Position).
-Control + Option + M to "Create Marker".
-"=" to "Rename Marker".
-
-In Logic's Key Commands, cancel the default assignment for Control + Option + Command + Space to allow the Apple Shortcut to trigger.
-
-
-In the Shortcuts app, create a new shortcut named "Chord logger".
-
-Add the "Run AppleScript" action and paste the script inside.
-Set Command + Option + Control + Space as the shortcut trigger. 
-
-
-Installing the Scripter plugin
-
-Assigning the shortcut in macOS Shortcuts
-
-Disabling the macOS “⌃⌥⌘Space” conflict
 
 Workflow: logging → copying → marker creation
 
-Logic Pro key-command setup
+
+Logic Pro key-command setup:
 
 Open Logic Pro → Key Commands → Edit…
 
@@ -97,7 +67,10 @@ If it finds a command, select it and click Clear.
 
 Click Save and give your key-commands set a name (e.g. “ChordLogger”).
 
-Install & configure the Scripter plugin
+
+--------------------------------------
+
+Install & configure the Scripter plugin:
 
 In your project, create (or select) a Software Instrument track.
 
@@ -120,7 +93,7 @@ Open Shortcuts.app.
 
 Click + to make a new shortcut, name it Create Chord Markers.
 
-Add action Run AppleScript, paste your Apple Shortcut code block.
+Add action Run AppleScript, paste Apple Shortcut code block.
 
 Click the ⚙️ (settings) button in the upper right.
 
@@ -151,7 +124,7 @@ Play or record your MIDI track with the Scripter plugin active.
 
 Open the Scripter Console (click the little “Trace” icon in the plugin).
 
-When you’re done, click inside that console window, ⌘A (Select All) → ⌘C (Copy).
+When you’re done, click inside that console window, select chord and time output, the  ⌘C (Copy).
 
 Switch back to the Arrange window.
 
