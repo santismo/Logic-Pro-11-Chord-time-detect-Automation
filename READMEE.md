@@ -91,10 +91,8 @@ tell application "System Events"
 			set AppleScript's text item delimiters to ","
 			set {posString, chordNameRaw} to text items of thisLine
 			set AppleScript's text item delimiters to ""
-			
 			-- 3) Clean up chord name
 			set cleanedChord to my trimText(chordNameRaw)
-			
 			-- A) Go to Position
 			keystroke "z"
 			delay 0.15
@@ -105,11 +103,9 @@ tell application "System Events"
 			delay 0.15
 			key code 36 -- Return
 			delay 0.15
-			
 			-- B) Create Marker (Control+Option+M)
 			key code 46 using {control down, option down}
 			delay 0.15
-			
 			-- C) Rename Marker with '=' key
 			key code 24 -- '='
 			delay 0.1
