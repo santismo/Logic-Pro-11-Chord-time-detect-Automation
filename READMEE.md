@@ -7,9 +7,13 @@ View
 Clock format 1 1  1
 
 Also, map the following key commands:
+
 Map “Go to Position…” to z
+
 Map “Create Marker” to Control + Option + M
+
 Map “Edit Marker Text” to =
+
 Unassign any Logic command using ⌃⌥⌘Space
 
 Video explanation: 
