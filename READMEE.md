@@ -6,6 +6,11 @@ Settings
 View
 Clock format 1 1  1
 
+Also, map the following key commands:
+Map “Go to Position…” to z
+Map “Create Marker” to Control + Option + M
+Map “Edit Marker Text” to =
+Unassign any Logic command using ⌃⌥⌘Space
 
 Video explanation: 
 https://www.youtube.com/shorts/LtUfBbqKwLI
@@ -44,6 +49,7 @@ In Logic Pro, map the following key commands:
 "z" to "Go to Position" (Transport > Go to Position).
 Control + Option + M to "Create Marker".
 "=" to "Rename Marker".
+
 In Logic's Key Commands, cancel the default assignment for Control + Option + Command + Space to allow the Apple Shortcut to trigger.
 
 --------------------------------------
@@ -69,23 +75,21 @@ Logic Pro key-command setup
 Open Logic Pro → Key Commands → Edit…
 
 Map “Go to Position…” to z
-
-
---------------------------------------
 Search for Transport → Go to Position…
 Click Learn by Key Label, press z, click Assign.
-Map “Create Marker” to Control + Option + M
 
+Map “Create Marker” to Control + Option + M
 Search for Global Tracks → Marker → Create Marker
 Click Learn by Key Label, press ⌃⌥M, click Assign.
-Map “Edit Marker Text” to =
 
+Map “Edit Marker Text” to =
 Search for Global Tracks → Marker → Edit Marker Text
 Click Learn by Key Label, press =, click Assign.
-Unassign any Logic command using ⌃⌥⌘Space
 
+Unassign any Logic command using ⌃⌥⌘Space
 In the same window, search by pressing Learn by Key Label, then hit ⌃⌥⌘Space
 If it finds a command, select it and click Clear.
+
 Click Save and give your key-commands set a name (e.g. “ChordLogger”).
 
 Install & configure the Scripter plugin
