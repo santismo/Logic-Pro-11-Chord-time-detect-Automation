@@ -15,57 +15,146 @@ Logic scripter chord/time detect:
 Copy all of this into scripter:
 --------------------------------------
 
-// Enable timing info var NeedsTimingInfo = true;
+// Enable timing info
+var NeedsTimingInfo = true;
 
-var chordNotes = []; var chordStartBeat = 0; var progression = []; // holds only chord names var TICKS_WAIT = 60; // detection wait ticks var PPQ = 960; // pulses per quarter note var OFFSET_TICKS = 942; // calibrate to shift reported position back to actual onset var ticksSinceLastNote = 0;
+var chordNotes = [];
+var chordStartBeat = 0;
+var progression = [];      // holds only chord names
+var TICKS_WAIT = 60;       // detection wait ticks
+var PPQ = 960;             // pulses per quarter note
+var OFFSET_TICKS = 942;    // calibrate to shift reported position back to actual onset
+var ticksSinceLastNote = 0;
 
-var PluginParameters = [ { name: "Detected Chord", type: "menu", defaultValue: 0, valueStrings: ["No chord"] }, { name: "Show Full Progression", type: "momentary" }, { name: "Reset Progression", type: "momentary" } ];
+var PluginParameters = [
+  { name: "Detected Chord", type: "menu", defaultValue: 0, valueStrings: ["No chord"] },
+  { name: "Show Full Progression", type: "momentary" },
+  { name: "Reset Progression", type: "momentary" }
+];
 
-// Build chord name list var roots = ["C","Db","D","Eb","E","F","Gb","G","Ab","A","Bb","B"]; var extensions = ["","m","7","maj7","m7","dim7","m7b5","aug","6","m6","9","m9", "maj9","maj13","6/9","m6/9","sus2","sus4","7(sus4)","7(#5)","7(b5)", "7(b9)","7(#9)","7(#9 13)","maj add 9","m11","m11(b9)","13","13(#9)", "13(#11)","maj9(#11)","maj9(#11#5)","maj9(sus4)","maj7(#5)","7(b5 b9)","m(maj7#5)" ]; var knownChords = ["No chord"]; roots.forEach(r => extensions.forEach(e => knownChords.push(r + e))); PluginParameters[0].valueStrings = knownChords;
+// Build chord name list
+var roots = ["C","Db","D","Eb","E","F","Gb","G","Ab","A","Bb","B"];
+var extensions = ["","m","7","maj7","m7","dim7","m7b5","aug","6","m6","9","m9",
+  "maj9","maj13","6/9","m6/9","sus2","sus4","7(sus4)","7(#5)","7(b5)",
+  "7(b9)","7(#9)","7(#9 13)","maj add 9","m11","m11(b9)","13","13(#9)",
+  "13(#11)","maj9(#11)","maj9(#11#5)","maj9(sus4)","maj7(#5)","7(b5 b9)","m(maj7#5)"
+];
+var knownChords = ["No chord"];
+roots.forEach(r => extensions.forEach(e => knownChords.push(r + e)));
+PluginParameters[0].valueStrings = knownChords;
 
-function updateUI(name) { var idx = knownChords.indexOf(name); SetParameter(0, idx !== -1 ? idx : 0); }
+function updateUI(name) {
+  var idx = knownChords.indexOf(name);
+  SetParameter(0, idx !== -1 ? idx : 0);
+}
 
-function HandleMIDI(event) { if (event instanceof NoteOn) { // record chord onset beat on first note if (chordNotes.length === 0) { chordStartBeat = GetTimingInfo().blockStartBeat; } if (!chordNotes.includes(event.pitch)) chordNotes.push(event.pitch); ticksSinceLastNote = 0; } event.send(); }
+function HandleMIDI(event) {
+  if (event instanceof NoteOn) {
+    // record chord onset beat on first note
+    if (chordNotes.length === 0) {
+      chordStartBeat = GetTimingInfo().blockStartBeat;
+    }
+    if (!chordNotes.includes(event.pitch)) chordNotes.push(event.pitch);
+    ticksSinceLastNote = 0;
+  }
+  event.send();
+}
 
-function ProcessMIDI() { if (chordNotes.length > 0) { ticksSinceLastNote++; if (ticksSinceLastNote >= TICKS_WAIT) { chordNotes.sort((a, b) => a - b); var name = getChordName(chordNotes);
-
-  // calculate onsetBeat directly
-  var onsetBeat = chordStartBeat;
-  var info = GetTimingInfo();
-  var meter = info.meterNumerator;
-  var measure = Math.floor(onsetBeat / meter) + 1;
-  var fracBeat = onsetBeat % meter;
-  var beatNum = Math.floor(fracBeat) + 1;
-  var ticksRaw = Math.round((fracBeat - Math.floor(fracBeat)) * PPQ);
-  // apply offset
-  var ticksAdj = ticksRaw - OFFSET_TICKS;
-  // wrap around if negative
-  if (ticksAdj < 0) {
-    ticksAdj += PPQ;
-    beatNum -= 1;
-    if (beatNum < 1) {
-      measure -= 1;
-      beatNum = meter;
+function ProcessMIDI() {
+  if (chordNotes.length > 0) {
+    ticksSinceLastNote++;
+    if (ticksSinceLastNote >= TICKS_WAIT) {
+      chordNotes.sort((a, b) => a - b);
+      var name = getChordName(chordNotes);
+      // calculate onsetBeat directly
+      var onsetBeat = chordStartBeat;
+      var info = GetTimingInfo();
+      var meter = info.meterNumerator;
+      var measure = Math.floor(onsetBeat / meter) + 1;
+      var fracBeat = onsetBeat % meter;
+      var beatNum = Math.floor(fracBeat) + 1;
+      var ticksRaw = Math.round((fracBeat - Math.floor(fracBeat)) * PPQ);
+      // apply offset
+      var ticksAdj = ticksRaw - OFFSET_TICKS;
+      // wrap around if negative
+      if (ticksAdj < 0) {
+        ticksAdj += PPQ;
+        beatNum -= 1;
+        if (beatNum < 1) {
+          measure -= 1;
+          beatNum = meter;
+        }
+      }
+      var projectPos = measure + ":" + beatNum + ":" + ticksAdj;
+      Trace(projectPos + "," + name);
+      progression.push(name);
+      updateUI(name);
+      chordNotes = [];
+      ticksSinceLastNote = 0;
     }
   }
-  var projectPos = measure + ":" + beatNum + ":" + ticksAdj;
-
-  Trace(projectPos + "," + name);
-  progression.push(name);
-  updateUI(name);
-
-  chordNotes = [];
-  ticksSinceLastNote = 0;
 }
-} }
 
-function ParameterChanged(param, value) { if (param === 1) Trace("\nFull Progression:\n" + progression.join(", ")); if (param === 2) { progression = []; Trace("\nProgression reset."); } }
+function ParameterChanged(param, value) {
+  if (param === 1) Trace("\nFull Progression:\n" + progression.join(", "));
+  if (param === 2) { progression = []; Trace("\nProgression reset."); }
+}
 
-function getNoteName(pitch) { var names = ["C","Db","D","Eb","E","F","Gb","G","Ab","A","Bb","B"]; return names[pitch % 12]; }
+function getNoteName(pitch) {
+  var names = ["C","Db","D","Eb","E","F","Gb","G","Ab","A","Bb","B"];
+  return names[pitch % 12];
+}
 
-// Extended chord library (unchanged) var chordLibrary = [ { name: "m(maj7#5)", intervals: [0,3,8,11] }, { name: "m11(b9)", intervals: [0,3,7,10,1,2,5] }, { name: "m11", intervals: [0,3,7,10,2,5] }, { name: "7(b5 b9)", intervals: [0,4,6,10,1] }, { name: "13(#9)", intervals: [0,4,7,10,3,9] }, { name: "7(#9 13)", intervals: [0,4,7,10,3,9] }, { name: "maj9(#11)", intervals: [0,4,7,11,2,6] }, { name: "maj7(#5)", intervals: [0,4,8,11] }, { name: "maj9(sus4)", intervals: [0,5,7,2,4] }, { name: "m9", intervals: [0,3,7,10,2] }, { name: "9", intervals: [0,4,7,10,2] }, { name: "m7", intervals: [0,3,7,10] }, { name: "7", intervals: [0,4,7,10] }, { name: "maj7", intervals: [0,4,7,11] }, { name: "m7b5", intervals: [0,3,6,10] }, { name: "dim7", intervals: [0,3,6,9] }, { name: "7(#5)", intervals: [0,4,8,10] }, { name: "m6/9", intervals: [0,3,7,9,2] }, { name: "6/9", intervals: [0,4,7,9,2] }, { name: "m", intervals: [0,3,7] }, { name: "", intervals: [0,4,7] }, { name: "sus4", intervals: [0,5,7] }, { name: "sus2", intervals: [0,2,7] }, { name: "7(sus4)", intervals: [0,5,10] } ];
+// Extended chord library (unchanged)
+var chordLibrary = [
+  { name: "m(maj7#5)",    intervals: [0,3,8,11] },
+  { name: "m11(b9)",      intervals: [0,3,7,10,1,2,5] },
+  { name: "m11",          intervals: [0,3,7,10,2,5] },
+  { name: "7(b5 b9)",     intervals: [0,4,6,10,1] },
+  { name: "13(#9)",       intervals: [0,4,7,10,3,9] },
+  { name: "7(#9 13)",     intervals: [0,4,7,10,3,9] },
+  { name: "maj9(#11)",    intervals: [0,4,7,11,2,6] },
+  { name: "maj7(#5)",     intervals: [0,4,8,11] },
+  { name: "maj9(sus4)",   intervals: [0,5,7,2,4] },
+  { name: "m9",           intervals: [0,3,7,10,2] },
+  { name: "9",            intervals: [0,4,7,10,2] },
+  { name: "m7",           intervals: [0,3,7,10] },
+  { name: "7",            intervals: [0,4,7,10] },
+  { name: "maj7",         intervals: [0,4,7,11] },
+  { name: "m7b5",         intervals: [0,3,6,10] },
+  { name: "dim7",         intervals: [0,3,6,9] },
+  { name: "7(#5)",        intervals: [0,4,8,10] },
+  { name: "m6/9",         intervals: [0,3,7,9,2] },
+  { name: "6/9",          intervals: [0,4,7,9,2] },
+  { name: "m",            intervals: [0,3,7] },
+  { name: "",             intervals: [0,4,7] },
+  { name: "sus4",         intervals: [0,5,7] },
+  { name: "sus2",         intervals: [0,2,7] },
+  { name: "7(sus4)",      intervals: [0,5,10] }
+];
 
-function getChordName(pitches) { if (!pitches.length) return "No chord"; var best = { name: "?", root: pitches[0], match: 0, weight: 0 }; for (var i = 0; i < pitches.length; i++) { var root = pitches[i]; var intervals = pitches.map(p => (p - root + 12) % 12); var unique = Array.from(new Set(intervals)); chordLibrary.forEach(function(ch) { var matchCount = ch.intervals.filter(iv => unique.includes(iv)).length; var ratio = matchCount / ch.intervals.length; var isDomForm = ch.name.includes("7") && !ch.name.includes("maj"); if (ratio >= 0.75 && matchCount > best.match) { best = { name: ch.name, root: root, match: matchCount, weight: ratio + (isDomForm && unique.includes(4) && unique.includes(10) ? 0.1 : 0) }; } }); } var rootName = getNoteName(best.root); var bass = getNoteName(pitches[0]); var chordName = rootName + best.name; if (best.root % 12 !== pitches[0] % 12) chordName += " / " + bass; return chordName; }
+function getChordName(pitches) {
+  if (!pitches.length) return "No chord";
+  var best = { name: "?", root: pitches[0], match: 0, weight: 0 };
+  for (var i = 0; i < pitches.length; i++) {
+    var root = pitches[i];
+    var intervals = pitches.map(p => (p - root + 12) % 12);
+    var unique = Array.from(new Set(intervals));
+    chordLibrary.forEach(function(ch) {
+      var matchCount = ch.intervals.filter(iv => unique.includes(iv)).length;
+      var ratio = matchCount / ch.intervals.length;
+      var isDomForm = ch.name.includes("7") && !ch.name.includes("maj");
+      if (ratio >= 0.75 && matchCount > best.match) {
+        best = { name: ch.name, root: root, match: matchCount, weight: ratio + (isDomForm && unique.includes(4) && unique.includes(10) ? 0.1 : 0) };
+      }
+    });
+  }
+  var rootName = getNoteName(best.root);
+  var bass = getNoteName(pitches[0]);
+  var chordName = rootName + best.name;
+  if (best.root % 12 !== pitches[0] % 12) chordName += " / " + bass;
+  return chordName;
+}
 
 
 --------------------------------------
