@@ -43,7 +43,14 @@ Detailed Instructions for Newbs:
 
 
 Workflow: logging → copying → marker creation
+--------------------------------------
 
+Important project settings:
+
+Settings
+View
+Clock format 1 1  1
+--------------------------------------
 
 Logic Pro key-command setup:
 
