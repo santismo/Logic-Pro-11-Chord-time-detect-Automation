@@ -19,6 +19,7 @@ Unassign any Logic command using ⌃⌥⌘Space
 Video explanation: 
 https://www.youtube.com/shorts/LtUfBbqKwLI
 
+--------------------------------------
 Logic scripter chord/time detect:
 
 Download and copy code from scripter raw code text file into scripter, or save scripter pst file to project if you know how:
@@ -33,6 +34,9 @@ Download and copy raw code from applescript text file into shortcuts, choose des
 
 --------------------------------------
 
+--------------------------------------
+
+--------------------------------------
 
 Detailed Instructions for Newbs:
 
@@ -56,15 +60,12 @@ Control + Option + M to "Create Marker".
 
 In Logic's Key Commands, cancel the default assignment for Control + Option + Command + Space to allow the Apple Shortcut to trigger.
 
---------------------------------------
 
 In the Shortcuts app, create a new shortcut named "Chord logger".
 
 Add the "Run AppleScript" action and paste the script inside.
-Set Command + Option + Control + Space as the shortcut trigger. Thought for 12 seconds Here’s a step-by-step guide to get everything running smoothly. We’ll cover:
-Logic Pro key-command setup
+Set Command + Option + Control + Space as the shortcut trigger. 
 
---------------------------------------
 
 Installing the Scripter plugin
 
