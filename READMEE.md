@@ -66,6 +66,7 @@ function ProcessMIDI() {
     if (ticksSinceLastNote >= TICKS_WAIT) {
       chordNotes.sort((a, b) => a - b);
       var name = getChordName(chordNotes);
+
       // calculate onsetBeat directly
       var onsetBeat = chordStartBeat;
       var info = GetTimingInfo();
@@ -86,9 +87,11 @@ function ProcessMIDI() {
         }
       }
       var projectPos = measure + ":" + beatNum + ":" + ticksAdj;
+
       Trace(projectPos + "," + name);
       progression.push(name);
       updateUI(name);
+
       chordNotes = [];
       ticksSinceLastNote = 0;
     }
@@ -155,6 +158,7 @@ function getChordName(pitches) {
   if (best.root % 12 !== pitches[0] % 12) chordName += " / " + bass;
   return chordName;
 }
+
 
 
 --------------------------------------
