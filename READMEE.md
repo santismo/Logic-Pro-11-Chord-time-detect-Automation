@@ -12,19 +12,17 @@ https://www.youtube.com/shorts/LtUfBbqKwLI
 
 Logic scripter chord/time detect:
 
-Copy code from scripter raw code text file into scripter, or save scripter pst file to project if you know how:
+Download and copy code from scripter raw code text file into scripter, or save scripter pst file to project if you know how:
 
 --------------------------------------
-
 
 Apple Shortcut, automate marker positions and chord name input:
 
 Command option control space —> chord marker place
 
-Copy raw code from applescript text file into shortcuts, choose desired shortcut command, or download and save shortcut automation file if you know how:
+Download and copy raw code from applescript text file into shortcuts, choose desired shortcut command, or download and save shortcut automation file if you know how:
 
 --------------------------------------
-
 
 
 Detailed Instructions for Newbs:
