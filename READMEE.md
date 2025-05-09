@@ -12,7 +12,7 @@ Map “Go to Position…” to z
 
 Map “Create Marker” to Control + Option + M
 
-Map “Edit Marker Text” to =
+Map “Rename Marker” to =
 
 Unassign any Logic command using ⌃⌥⌘Space
 
@@ -64,8 +64,8 @@ Map “Create Marker” to Control + Option + M
 Search for Global Tracks → Marker → Create Marker
 Click Learn by Key Label, press ⌃⌥M, click Assign.
 
-Map “Edit Marker Text” to =
-Search for Global Tracks → Marker → Edit Marker Text
+Map “Rename Marker” to =
+Search for Global Tracks → Marker → Rename Marker
 Click Learn by Key Label, press =, click Assign.
 
 Unassign any Logic command using ⌃⌥⌘Space
