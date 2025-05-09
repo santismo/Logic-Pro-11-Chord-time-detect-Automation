@@ -19,6 +19,9 @@ Unassign any Logic command using ⌃⌥⌘Space
 Video explanation: 
 https://www.youtube.com/shorts/LtUfBbqKwLI
 
+Video Instructions:
+https://youtu.be/g8brcsVjSEI?si=Xq0rml-RQuBYNH3X
+
 --------------------------------------
 Logic scripter chord/time detect:
 
