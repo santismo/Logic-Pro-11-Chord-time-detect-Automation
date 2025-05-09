@@ -10,7 +10,7 @@ Also, map the following key commands:
 
 Map “Go to Position…” to z
 
-Map “Create Marker” to Control + Option + M
+Map “Create Marker without rounding” to Control + Option + M
 
 Map “Rename Marker” to =
 
@@ -60,8 +60,8 @@ Map “Go to Position…” to z
 Search for Transport → Go to Position…
 Click Learn by Key Label, press z, click Assign.
 
-Map “Create Marker” to Control + Option + M
-Search for Global Tracks → Marker → Create Marker
+Map “Create Marker without rounding” to Control + Option + M
+Search for Global Tracks → Marker → Create Marker without rounding
 Click Learn by Key Label, press ⌃⌥M, click Assign.
 
 Map “Rename Marker” to =
