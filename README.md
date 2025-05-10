@@ -27,3 +27,21 @@ https://www.youtube.com/shorts/LtUfBbqKwLI
 
 Video Instructions:
 https://youtu.be/g8brcsVjSEI?si=Xq0rml-RQuBYNH3X
+
+
+Updates
+---------
+
+- better chord analysis and detection/less misidentification 
+- bass note chord classification preference
+- slash chords optional
+- single notes dismissed
+- arpeggios/rolled/raked chords permitted
+
+In Devolpment
+----------
+- global chord track implementation
+- better complex chord determination
+- audio to midi analysis expansion
+- possible plug-in finished product
+- :)
