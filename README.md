@@ -52,7 +52,7 @@ Ctrl opt E, edit chord
 
 Z, go to position 
 
-- map new chord track automation to shortcut of your choosing after download and instal.
+- Remember to setup chord track automation to hotkey combo of your choosing after download and instal.
 
 
 In Devolpment
