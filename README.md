@@ -54,8 +54,8 @@ Z, go to position
 
 - Remember to setup chord track automation to hotkey combo of your choosing after download and instal.
 
-Also, I some interesting chord meta event data numeric 103, which turns midi track into midi dragable region to chord track.
-
+Also, I found some interesting chord meta event data numeric 103, which turns normal midi regions into midi chord regions dragable to chord track.
+Don't know how to exploit it though... 🤷‍♂️
 
 In Development
 --------------
