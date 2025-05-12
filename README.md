@@ -57,7 +57,7 @@ Z, go to position
 Also, I some interesting chord meta event data numeric 103, which turns midi track into midi dragable region to chord track.
 
 
-In Devolpment
+In Development
 --------------
 - better complex chord determination
 - audio to midi analysis expansion
