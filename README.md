@@ -38,9 +38,23 @@ Updates
 - single notes dismissed
 - arpeggios/rolled/raked chords permitted
 
-In Devolpment
+New Release
 ----------
-- global chord track implementation
+✅ global chord track implementation
+  
+(further documentation coming, current working shortcut available in files)
+
+^Necccasary Key commands:
+
+Shift C, create chord
+
+Ctrl opt E, edit chord
+
+Z, go to position 
+
+
+In Devolpment
+--------------
 - better complex chord determination
 - audio to midi analysis expansion
 - possible plug-in finished product
