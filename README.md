@@ -41,7 +41,7 @@ Updates
 
 New Release(s)
 ----------
-✅ global chord track implementation
+✅ global chord track implementation, still kinda buggy and slow, so be careful!
   
 (further documentation coming, current working shortcut available in files)
 
