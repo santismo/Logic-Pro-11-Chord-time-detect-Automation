@@ -3,10 +3,12 @@ ChordLog
 Important project settings:
 
 (17 may 2025 update: clock settings customizable in script now, feel free to use your own prefered format)
+
 Settings
+
 View
-Clock format 1 1  1 
-(the one without any periods between the 1s)
+
+Clock format 
 
 <img width="250" alt="Screenshot 2025-05-09 at 7 55 10 PM" src="https://github.com/user-attachments/assets/c5c7fe5a-ed62-46e2-b01f-64874ca97866" />
 
@@ -67,6 +69,8 @@ NEW: CLOCKS version, if you dont want to change your clock view settings.
 
 Also, I found some interesting chord meta event data numeric 103, which turns normal midi regions into midi chord regions dragable to chord track.
 Don't know how to exploit it though... 🤷‍♂️
+
+Additional, if anyone knows in depth apple CAF encoding or AIF structure and cares to help me just make a midi to apple loops chord injecter swift code, let me know. 
 
 In Development
 --------------
