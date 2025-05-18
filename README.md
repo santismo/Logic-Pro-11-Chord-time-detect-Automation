@@ -41,7 +41,7 @@ Updates
 
 -chord play speed (fast to slow)
 
--v6.713 also available 💡 allows users to add-learn chords/inversions/voicings not in index or not detecting as names they want. Save/overwrite after adding new chords.
+-v6.714 also available 💡 allows users to add-learn chords/inversions/voicings not in index or not detecting as names they want. Save/overwrite after adding new chords.
 
   older updates
 - bass note chord classification preference
