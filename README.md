@@ -2,6 +2,7 @@ ChordLog
 --------------------------------
 Important project settings:
 
+(17 may 2025 update: clock settings customizable in script now, feel free to use your own prefered format)
 Settings
 View
 Clock format 1 1  1 
@@ -31,8 +32,15 @@ https://youtu.be/g8brcsVjSEI?si=Xq0rml-RQuBYNH3X
 
 Updates
 ---------
+17 may 2025 
 
-- better chord analysis and detection/less misidentification 
+-EVEN better chord analysis and detection/less misidentification
+
+-clock format preference selection
+
+-chord play speed (fast to slow)
+
+  older updates
 - bass note chord classification preference
 - slash chords optional
 - single notes dismissed
@@ -43,7 +51,7 @@ New Release(s)
 ----------
 ✅ global chord track implementation, still kinda buggy and slow, so be careful!
   
-(further documentation coming, current working shortcut available in files)
+(further documentation coming, current semi-working shortcut available in files)
 
 ^Necccasary Key commands:
 
