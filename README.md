@@ -1,6 +1,5 @@
 ChordLog
 --------------------------------
-Important project settings:
 
 (17 may 2025 update: clock settings customizable in script now, feel free to use your own prefered format)
 
@@ -15,7 +14,7 @@ Clock format
 
 ---------------------
 
-Also, map the following key commands:
+Map the following key commands:
 
 Map “Go to Position…” to z
 
