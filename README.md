@@ -32,7 +32,7 @@ https://youtu.be/g8brcsVjSEI?si=Xq0rml-RQuBYNH3X
 
 Updates
 ---------
-17 may 2025 
+17 may 2025 v6.7
 
 -EVEN better chord analysis and detection/less misidentification
 
